@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-
+const mongoose = require("mongoose");
 // TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
@@ -13,6 +13,10 @@ const userSchema = new Schema(
     passwordHash: {
       type: String,
       required: [true, 'Password is required.']
+    },
+    year: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Year"
     }
   },
   {
