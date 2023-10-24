@@ -14,10 +14,11 @@ const userSchema = new Schema(
       type: String,
       required: [true, 'Password is required.']
     },
-    year: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Year"
+    income: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Income"
     }
+
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`    
