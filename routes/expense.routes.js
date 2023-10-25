@@ -15,7 +15,7 @@ router.get("/", isAuthenticated, (req, res, next) => {
 
 router.post(
     "/",
-  /* isAuthenticated, */ async (req, res) => {
+    isAuthenticated, async (req, res) => {
         try {
             const userId = req.body.user;
             const expenseData = { ...req.body, user: userId };
@@ -33,7 +33,7 @@ router.post(
 
 router.put(
     "/:expenseId",
-  /* isAuthenticated, */ async (req, res) => {
+    isAuthenticated, async (req, res) => {
         const { expenseId } = req.params;
         try {
             const updatedExpense = await Expense.findByIdAndUpdate(expenseId, req.body, {
@@ -49,7 +49,7 @@ router.put(
 
 router.delete(
     "/:expenseId",
-  /* isAuthenticated, */ async (req, res) => {
+    isAuthenticated, async (req, res) => {
         const { expenseId } = req.params;
         try {
             await Expense.findByIdAndDelete(expenseId);

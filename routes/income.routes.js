@@ -15,7 +15,7 @@ router.get("/", isAuthenticated, (req, res, next) => {
 
 router.post(
   "/",
-  /* isAuthenticated, */ async (req, res) => {
+  isAuthenticated, async (req, res) => {
     try {
       const userId = req.body.user;
       const incomeData = { ...req.body, user: userId };
@@ -33,7 +33,7 @@ router.post(
 
 router.put(
   "/:incomeId",
-  /* isAuthenticated, */ async (req, res) => {
+  isAuthenticated, async (req, res) => {
     const { incomeId } = req.params;
     try {
       const updatedIncome = await Income.findByIdAndUpdate(incomeId, req.body, {
@@ -49,7 +49,7 @@ router.put(
 
 router.delete(
   "/:incomeId",
-  /* isAuthenticated, */ async (req, res) => {
+  isAuthenticated, async (req, res) => {
     const { incomeId } = req.params;
     try {
       await Income.findByIdAndDelete(incomeId);
