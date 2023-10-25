@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 const expenseSchema = new Schema(
     {
-        name: { type: String, unique: true },
+        name: { type: String },
         value: Number,
         user: {
             type: mongoose.Schema.Types.ObjectId,

@@ -21,9 +21,9 @@ router.post(
             const expenseData = { ...req.body, user: userId };
             const newExpense = await Expense.create(expenseData);
             await User.findByIdAndUpdate(userId, {
-                $push: { income: newExpense._id },
+                $push: { expense: newExpense._id },
             });
-            res.status(201).json({ income: newExpense });
+            res.status(201).json({ expense: newExpense });
         } catch (error) {
             console.log(error);
             res.status(500).json({ error });
@@ -39,7 +39,7 @@ router.put(
             const updatedExpense = await Expense.findByIdAndUpdate(expenseId, req.body, {
                 new: true,
             });
-            res.status(200).json({ income: updatedExpense });
+            res.status(200).json({ expense: updatedExpense });
         } catch (error) {
             console.log(error);
             res.status(500).json({ error });
