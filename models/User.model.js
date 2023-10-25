@@ -17,6 +17,10 @@ const userSchema = new Schema(
     income: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: "Income"
+    },
+    expense: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Expense"
     }
 
   },

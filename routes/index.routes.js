@@ -7,8 +7,8 @@ router.get("/", (req, res, next) => {
 /* const userRoutes = require("./user.routes");
 router.use("/user", userRoutes) */
 
-/* const expRoutes = require("./expense.routes")
-router.use("/expense", expRoutes) */
+const expRoutes = require("./expense.routes")
+router.use("/expense", expRoutes)
 
 const incRoutes = require("./income.routes")
 router.use("/income", incRoutes)
