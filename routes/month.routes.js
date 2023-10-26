@@ -14,7 +14,7 @@ router.get("/", isAuthenticated, (req, res, next) => {
 
 router.post(
     "/",
-    /* isAuthenticated, */ async (req, res) => {
+     isAuthenticated, async (req, res) => {
         try {
             const yearId = req.body.year;
             const month = { ...req.body, year: yearId };

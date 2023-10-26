@@ -2,7 +2,7 @@ const { Schema, model } = require("mongoose");
 const mongoose = require("mongoose");
 
 const yearSchema = new Schema({
-  year: Number,
+  name: Number,
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",

@@ -15,7 +15,7 @@ router.get("/", isAuthenticated, (req, res, next) => {
 
 router.post(
   "/",
-  /* isAuthenticated, */ async (req, res) => {
+   isAuthenticated, async (req, res) => {
     try {
       const monthId = req.body.month;
       const data = { ...req.body, month: monthId };
@@ -32,14 +32,14 @@ router.post(
 );
 
 router.put(
-  "/:incomeId",
+  "/:dataId",
   isAuthenticated, async (req, res) => {
-    const { incomeId } = req.params;
+    const { dataId } = req.params;
     try {
-      const updatedIncome = await Income.findByIdAndUpdate(incomeId, req.body, {
+      const updatedData = await Data.findByIdAndUpdate(dataId, req.body, {
         new: true,
       });
-      res.status(200).json({ income: updatedIncome });
+      res.status(200).json({ data: updatedData });
     } catch (error) {
       console.log(error);
       res.status(500).json({ error });
@@ -48,11 +48,11 @@ router.put(
 );
 
 router.delete(
-  "/:incomeId",
+  "/:dataId",
   isAuthenticated, async (req, res) => {
-    const { incomeId } = req.params;
+    const { dataId } = req.params;
     try {
-      await Income.findByIdAndDelete(incomeId);
+      await Data.findByIdAndDelete(dataId);
       res.status(200).send();
     } catch (error) {
       console.log(error);

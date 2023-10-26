@@ -2,7 +2,7 @@ const { isAuthenticated } = require("../middlewares/routeGuard.middleware");
 const router = require("express").Router();
 const User = require("../models/User.model");
 
-router.get("/:userId", /* isAuthenticated, */ async (req, res) => {
+router.get("/:userId",  isAuthenticated,  async (req, res) => {
   const { userId } = req.params;
 
   try {
