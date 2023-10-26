@@ -30,7 +30,7 @@ router.post(
     }
 );
 
-router.get("/:monthId", /* isAuthenticated, */ async (req, res) => {
+router.get("/:monthId", isAuthenticated, async (req, res) => {
     const { monthId } = req.params;
 
     try {

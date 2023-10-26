@@ -22,6 +22,7 @@ router.get("/:userId",  isAuthenticated,  async (req, res) => {
       })
     const userCopy = oneUser._doc;
     delete userCopy.passwordHash;
+    console.log(userCopy)
     res.status(200).json({ user: userCopy });
     console.log(userCopy)
   } catch (error) {

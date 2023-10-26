@@ -29,7 +29,7 @@ router.post(
         }
     }
 );
-router.get("/:yearId", /* isAuthenticated, */ async (req, res) => {
+router.get("/:yearId",  isAuthenticated, async (req, res) => {
     const { yearId } = req.params;
 
     try {
