@@ -3,7 +3,7 @@ const { isAuthenticated } = require("../middlewares/routeGuard.middleware");
 const router = require("express").Router();
 const User = require("../models/User.model");
 
-const Income = require("../models/Income.model");
+const Data = require("../models/Data.model");
 
 router.get("/", isAuthenticated, (req, res, next) => {
   res.json("All of the incomes");
@@ -21,7 +21,7 @@ router.post(
       const incomeData = { ...req.body, user: userId };
       const newIncome = await Income.create(incomeData);
       await User.findByIdAndUpdate(userId, {
-        $push: { income: newIncome._id },
+        $push: { data: newIncome._id },
       });
       res.status(201).json({ income: newIncome });
     } catch (error) {

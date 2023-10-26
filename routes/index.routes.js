@@ -7,10 +7,13 @@ router.get("/", (req, res, next) => {
 const userRoutes = require("./user.routes");
 router.use("/user", userRoutes)
 
-const expRoutes = require("./expense.routes")
-router.use("/expense", expRoutes)
+const yearRoutes = require("./year.routes")
+router.use("/year", yearRoutes)
 
-const incRoutes = require("./income.routes")
-router.use("/income", incRoutes)
+const monthRoutes = require("./month.routes")
+router.use("/month", monthRoutes)
+
+const dataRoutes = require("./data.routes")
+router.use("/data", dataRoutes)
 
 module.exports = router;

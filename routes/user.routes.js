@@ -10,8 +10,7 @@ router.get("/:userId", isAuthenticated, async (req, res) => {
 
   try {
     const oneUser = await User.findById(userId)
-      .populate("income")
-      .populate("expense");
+      .populate("year")
     const userCopy = oneUser._doc;
     delete userCopy.passwordHash;
     res.status(200).json({ user: userCopy });
