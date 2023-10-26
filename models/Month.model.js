@@ -7,10 +7,10 @@ const monthSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "year",
     },
-    data: {
+    data: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Data",
-    },
+    }],
 });
 
 const Month = model("Month", monthSchema);

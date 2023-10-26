@@ -2,15 +2,24 @@ const { isAuthenticated } = require("../middlewares/routeGuard.middleware");
 const router = require("express").Router();
 const User = require("../models/User.model");
 
-/* const Income = require("../models/Income.model");
-const Expense = require("../models/Expense.model"); */
-
-router.get("/:userId", isAuthenticated, async (req, res) => {
+router.get("/:userId", /* isAuthenticated, */ async (req, res) => {
   const { userId } = req.params;
 
   try {
     const oneUser = await User.findById(userId)
-      .populate("year")
+      .populate({
+        path: "year",
+        model: "Year",
+        populate: {
+          path: "month",
+          model: "Month",
+          populate: {
+            path: "data",
+            model: "Data",
+          }
+        },
+
+      })
     const userCopy = oneUser._doc;
     delete userCopy.passwordHash;
     res.status(200).json({ user: userCopy });
