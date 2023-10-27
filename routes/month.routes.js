@@ -29,6 +29,38 @@ router.post(
         }
     }
 );
+
+router.put(
+    "/:monthId",
+    isAuthenticated, async (req, res) => {
+      const { monthId } = req.params;
+      try {
+        const updatedMonth = await Month.findByIdAndUpdate(monthId, req.body, {
+          new: true,
+        });
+        res.status(200).json({ month: updatedMonth });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+      }
+    }
+  );
+  
+  router.delete(
+    "/:monthId",
+    isAuthenticated, async (req, res) => {
+      const { monthId } = req.params;
+      try {
+        await Month.findByIdAndDelete(monthId);
+        res.status(200).send();
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+      }
+    }
+  );
+
+
 router.get('/:yearId', isAuthenticated, async (req, res) => {
     const { yearId } = req.params
     try {

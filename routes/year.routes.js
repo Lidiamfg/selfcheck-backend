@@ -26,6 +26,38 @@ router.post(
         }
     }
 );
+
+router.put(
+    "/:yearId",
+    isAuthenticated, async (req, res) => {
+      const { yearId } = req.params;
+      try {
+        const updatedYear = await Year.findByIdAndUpdate(yearId, req.body, {
+          new: true,
+        });
+        res.status(200).json({ year: updatedYear });
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+      }
+    }
+  );
+  
+  router.delete(
+    "/:yearId",
+    isAuthenticated, async (req, res) => {
+      const { yearId } = req.params;
+      try {
+        await Year.findByIdAndDelete(yearId);
+        res.status(200).send();
+      } catch (error) {
+        console.log(error);
+        res.status(500).json({ error });
+      }
+    }
+  );
+
+
 router.get('/:userId', isAuthenticated, async (req, res) => {
     const { userId } = req.params
     try {
@@ -38,5 +70,8 @@ router.get('/:userId', isAuthenticated, async (req, res) => {
         res.status(400).json({ error })
     }
 })
+
+
+  
 
 module.exports = router;
