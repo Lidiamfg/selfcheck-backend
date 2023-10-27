@@ -5,17 +5,21 @@ const Month = require("../models/Month.model");
 
 const Data = require("../models/Data.model");
 
-router.get("/", isAuthenticated, (req, res, next) => {
-  res.json("All of the incomes");
-});
-
-/* router.get('/:id', (req, res, next) => {
-  res.json('All good in here')
-}) */
+router.get('/:monthId', isAuthenticated, async (req, res) => {
+  const { monthId } = req.params
+  try {
+    const userData = await Data.find({ month: monthId })
+    res.json(userData)
+  }
+  catch (error) {
+    console.log(error)
+    res.status(400).json({ error })
+  }
+})
 
 router.post(
   "/",
-   isAuthenticated, async (req, res) => {
+  isAuthenticated, async (req, res) => {
     try {
       const monthId = req.body.month;
       const data = { ...req.body, month: monthId };
