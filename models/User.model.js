@@ -5,23 +5,25 @@ const userSchema = new Schema(
   {
     username: {
       type: String,
-      required: [true, 'Username is required.'],
+      required: [true, "Username is required."],
       unique: true,
       lowercase: true,
-      trim: true
+      trim: true,
     },
     passwordHash: {
       type: String,
-      required: [true, 'Password is required.']
+      required: [true, "Password is required."],
     },
-    year: [{
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Year"
-    }],
+    year: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Year",
+      },
+    ],
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
-    timestamps: true
+    // this second object adds extra properties: `createdAt` and `updatedAt`
+    timestamps: true,
   }
 );
 
