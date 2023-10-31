@@ -17,6 +17,7 @@ router.get("/", isAuthenticated, async (req, res) => {
 router.post("/", isAuthenticated, async (req, res) => {
   try {
     const yearId = req.body.year;
+
     const month = { ...req.body, year: yearId };
     const newMonth = await Month.create(month);
     await Year.findByIdAndUpdate(yearId, {
@@ -45,7 +46,11 @@ router.put("/:monthId", isAuthenticated, async (req, res) => {
 router.delete("/:monthId", isAuthenticated, async (req, res) => {
   const { monthId } = req.params;
   try {
+    const currentMonth = await Month.findById(monthId);
     await Month.findByIdAndDelete(monthId);
+    await Year.findByIdAndUpdate(currentMonth.year, {
+      $pull: { month: monthId },
+    });
     res.status(200).send();
   } catch (error) {
     console.log(error);

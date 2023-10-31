@@ -7,10 +7,12 @@ const yearSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
-  month: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Month",
-  }],
+  month: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Month",
+    },
+  ],
 });
 
 const Year = model("Year", yearSchema);
