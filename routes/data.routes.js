@@ -38,15 +38,10 @@ router.post("/", isAuthenticated, async (req, res) => {
       },
       { new: true }
     );
-    console.log("Month", updatedMonth);
-
     const month = await Month.findById(monthId);
-    console.log(month);
     const yearId = month.year;
     let month2 = await Month.find({ year: yearId });
-    console.log(month2);
     let incomeAnualTotal = month2.reduce((a, b) => a + b.incomeSum, 0);
-    console.log("OLA", incomeTotal);
     let expenseAnualTotal = month2.reduce((a, b) => a + b.expenseSum, 0);
     await Year.findByIdAndUpdate(
       yearId,
@@ -89,7 +84,7 @@ router.delete("/:dataId", isAuthenticated, async (req, res) => {
     let expense = data2.filter((element) => element.category === "Expense");
     let incomeTotal = income.reduce((a, b) => a + b.value, 0);
     let expenseTotal = expense.reduce((a, b) => a + b.value, 0);
-    const updatedMonth = await Month.findByIdAndUpdate(
+    await Month.findByIdAndUpdate(
       currentData.month,
       {
         incomeSum: incomeTotal,
@@ -97,7 +92,19 @@ router.delete("/:dataId", isAuthenticated, async (req, res) => {
       },
       { new: true }
     );
-    console.log("Month", updatedMonth);
+    const month = await Month.findById(currentData.month);
+    const yearId = month.year;
+    let month2 = await Month.find({ year: yearId });
+    let incomeAnualTotal = month2.reduce((a, b) => a + b.incomeSum, 0);
+    let expenseAnualTotal = month2.reduce((a, b) => a + b.expenseSum, 0);
+    await Year.findByIdAndUpdate(
+      yearId,
+      {
+        monthIncomeSum: incomeAnualTotal,
+        monthExpenseSum: expenseAnualTotal,
+      },
+      { new: true }
+    );
     res.status(200).send();
   } catch (error) {
     console.log(error);
