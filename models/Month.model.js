@@ -2,15 +2,21 @@ const { Schema, model } = require("mongoose");
 const mongoose = require("mongoose");
 
 const monthSchema = new Schema({
-    name: { type: String, enum: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] },
-    year: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "year",
+  name: {
+    type: String,
+  },
+  year: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "year",
+  },
+  data: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Data",
     },
-    data: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Data",
-    }],
+  ],
+  incomeSum: { type: Number, default: 0 },
+  expenseSum: { type: Number, default: 0 },
 });
 
 const Month = model("Month", monthSchema);

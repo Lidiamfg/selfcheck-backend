@@ -17,12 +17,24 @@ router.get("/", isAuthenticated, async (req, res) => {
 router.post("/", isAuthenticated, async (req, res) => {
   try {
     const yearId = req.body.year;
-
     const month = { ...req.body, year: yearId };
     const newMonth = await Month.create(month);
     await Year.findByIdAndUpdate(yearId, {
       $push: { month: newMonth._id },
     });
+    let month2 = await Month.find({ year: yearId });
+    console.log(month2);
+    let incomeTotal = month2.reduce((a, b) => a + b.incomeSum, 0);
+    console.log("OLA", incomeTotal);
+    let expenseTotal = month2.reduce((a, b) => a + b.expenseSum, 0);
+    await Year.findByIdAndUpdate(
+      yearId,
+      {
+        monthIncomeSum: incomeTotal,
+        monthExpenseSum: expenseTotal,
+      },
+      { new: true }
+    );
     res.status(201).json({ month: newMonth });
   } catch (error) {
     console.log(error);

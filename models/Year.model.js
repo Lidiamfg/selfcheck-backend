@@ -13,6 +13,8 @@ const yearSchema = new Schema({
       ref: "Month",
     },
   ],
+  monthIncomeSum: { type: Number, default: 0 },
+  monthExpenseSum: { type: Number, default: 0 },
 });
 
 const Year = model("Year", yearSchema);
