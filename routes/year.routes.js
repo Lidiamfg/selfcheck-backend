@@ -55,7 +55,6 @@ router.get("/:userId", isAuthenticated, async (req, res) => {
   const { userId } = req.params;
   try {
     const userYears = await Year.find({ user: userId });
-    /* console.log("hello", userYears); */
     res.json(userYears);
   } catch (error) {
     console.log(error);
